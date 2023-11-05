@@ -1,0 +1,88 @@
+﻿@model ListSeatPageVM
+@{
+    ViewBag.Title = "TakeTicket";
+}
+
+
+<head>
+    <script>
+        function getSeatNumber(button) {
+            document.getElementById('seatNumber').value = button.name;
+            button.style.backgroundColor = 'red';
+        }
+        function getTime() {
+            document.getElementById('hiddenTime').value = document.getElementById('datePicker').value;
+        }
+    </script>
+    <style>
+
+        .sahne {
+            height: 50px;
+            width: 220px;
+            color: aqua;
+            text-align: center;
+            background-color: blue;
+        }
+
+        .seat {
+            background-color: green;
+            height: 50px;
+            width: 50px;
+            margin: 3px;
+            display: inline-block;
+            cursor: pointer;
+            color: black;
+        }
+
+        .row {
+            display: flex
+        }
+
+        .sira {
+            position: relative;
+            left: 300px;
+            bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>@TempData["var"]</h1>
+    <h1>@TempData["time"]</h1>
+    <h1>@TempData["vipbug"]</h1>
+    <h1>@TempData["bug"]</h1>
+    @using (Html.BeginForm("TakeTicket", "Ticketshopping", new { salonNo = Model.Movie.SalonNo, filmTitle = Model.Movie.FilmTitle }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.DropDownListFor(x => x.Ticket.ID, new SelectList(Model.Sessions, "ID", "SessionTime"), "Seans Seciniz", new { @class = "form-control" })
+        <input type="date" id="datePicker" onchange="getTime()" class="form-control" />
+        <div class="sira">
+            <div class="sahne">Sahne</div>
+            <div class="row">
+                <button class="seat" name="lblA1" onclick="getSeatNumber(this)">A1</button>
+                <button class="seat" name="lblA2" onclick="getSeatNumber(this)">A2</button>
+                <button class="seat" name="lblA3" onclick="getSeatNumber(this)">A3</button>
+            </div>
+            <div class="row">
+                <button class="seat" name="lblB1" onclick="getSeatNumber(this)">B1</button>
+                <button class="seat" name="lblB2" onclick="getSeatNumber(this)">B2</button>
+                <button class="seat" name="lblB3" onclick="getSeatNumber(this)">B3</button>
+                <button class="seat" name="lblB4" onclick="getSeatNumber(this)">B4</button>
+            </div>
+            <div class="row">
+                <button class="seat" name="lblC1" onclick="getSeatNumber(this)">C1</button>
+                <button class="seat" name="lblC2" onclick="getSeatNumber(this)">C2</button>
+                <button class="seat" name="lblC3" onclick="getSeatNumber(this)">C3</button>
+            </div>
+            <div class="row">
+                <button class="seat" name="lblD1" onclick="getSeatNumber(this)">D1</button>
+                <button class="seat" name="lblD2" onclick="getSeatNumber(this)">D2</button>
+                <button class="seat" name="lblD3" onclick="getSeatNumber(this)">D3</button>
+                <button class="seat" name="lblD4" onclick="getSeatNumber(this)">D4</button>
+            </div>
+        </div>
+        @Html.HiddenFor(x => x.Ticket.SeatNumber, new { id = "seatNumber" })
+        @Html.HiddenFor(x => x.Ticket.TicketDate, new { id = "hiddenTime" })
+    }
+</body>
+
+
+

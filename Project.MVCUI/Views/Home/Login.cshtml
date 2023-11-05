@@ -1,0 +1,47 @@
+﻿@model LoginPageVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/OuterTools/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/OuterTools/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="~/OuterTools/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/OuterTools/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <!-- Custom styles for this template -->
+    <link href="~/OuterTools/css/style.css" rel="stylesheet">
+    <link href="~/OuterTools/css/style-responsive.css" rel="stylesheet" />
+</head>
+<body class="login-body">
+    <div class="container">
+        <h1>@TempData["kullaniciyok"]</h1>
+        <h1>@TempData["yanlissifre"]</h1>
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-signin" }))
+        {
+            <br />
+            <center><h2>Login</h2></center>
+            <div class="login-wrap center">
+                @Html.TextBoxFor(x => x.Customer.VipID, new { @class = "form-control", placeholder = "VipID" })
+                @Html.TextBoxFor(x => x.Customer.Email, new { @class = "form-control", placeholder = "Email" })
+                @Html.PasswordFor(x => x.Customer.PassWord, new { @class = "form-control", placeholder = "PassWord" })
+                <center>
+                    <button class="btn btn-primary">Login</button>
+                </center>
+                <br />
+                <center>
+                    @Html.ActionLink("Register", "RegisterNow", "Register")
+                </center>
+            </div>
+        }
+
+
+    </div>
+</body>
+</html>

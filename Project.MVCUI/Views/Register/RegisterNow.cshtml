@@ -1,0 +1,55 @@
+﻿@model RegisterNowPageVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+    <meta name="viewport" content="width=device-width" />
+    <title>RegisterNow</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/OuterTools/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/OuterTools/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="~/OuterTools/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/OuterTools/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <!-- Custom styles for this template -->
+    <link href="~/OuterTools/css/style.css" rel="stylesheet">
+    <link href="~/OuterTools/css/style-responsive.css" rel="stylesheet" />
+</head>
+<body class="login-body">
+    <div class="container">
+        @using (Html.BeginForm("RegisterNow", "Register", FormMethod.Post, new { @class = "form-signin" }))
+         {
+            <br />
+            <h2>@TempData["kullanıcımevcut"]</h2>
+            <center><h2>Register</h2></center>
+            <div class="login-wrap center">
+                @Html.TextBoxFor(x => x.Customer.UserName, new { @class = "form-control", placeholder = "UserName" })
+                @Html.TextBoxFor(x => x.Customer.PassWord, new { @class = "form-control", placeholder = "PassWord" })
+                @Html.TextBoxFor(x => x.Customer.FirstName, new { @class = "form-control", placeholder = "FirstName" })
+                @Html.TextBoxFor(x => x.Customer.LastName, new { @class = "form-control", placeholder = "LastName" })
+                @Html.TextBoxFor(x => x.Customer.PhoneNumber, new { @class = "form-control", placeholder = "Phone" })
+                @Html.TextBoxFor(x => x.Customer.Email, new { @class = "form-control", placeholder = "@gmail.com" })
+                @Html.TextBoxFor(x => x.Customer.Age, new { @class = "form-control", placeholder = "Age" })
+                @Html.TextBoxFor(x => x.Customer.Gender, new { @class = "form-control", placeholder = "Women-Male" })
+                @Html.EnumDropDownListFor(x =>x.Customer.CustomerRole,"Role Seciniz", new { @class = "form-control" })
+                @Html.TextBoxFor(x => x.Customer.Job, new { @class = "form-control", placeholder = "Job" })
+                <center>
+                    <button class="btn btn-primary"> Register </button>
+                </center>
+                <br />
+                <center>
+                    @Html.ActionLink("Login", "Login", "Home")
+                </center>
+            </div>
+            @Html.HiddenFor(x =>x.Customer.CustomerRole, new { id = "category" })
+
+         }
+    </div>
+</body>
+</html>

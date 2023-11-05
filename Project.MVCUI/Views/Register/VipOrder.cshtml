@@ -1,0 +1,59 @@
+﻿@model OrderPageVM
+@{
+    ViewBag.Title = "VipOrder";
+}
+
+<div>
+    <h1>@TempData["sorun"]</h1>
+    <h1>@TempData["baglantiRed"]</h1>
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            <label style="padding-top:10px" class="col-sm-2 control-label">Kart Üzarndeki isim</label>
+            <div style="padding-top:10px" class="col-sm-10">
+                @Html.TextBoxFor(x => x.PaymentRequestModel.CardUserName, new { @class = "form-control" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label style="padding-top:10px" class="col-sm-2 control-label">Kart Numarası</label>
+            <div style="padding-top:10px" class="col-sm-10">
+                @Html.TextBoxFor(x => x.PaymentRequestModel.CardNumber, new { @class = "form-control" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label style="padding-top:10px" class="col-sm-2 control-label">Kart Güvenlik Numarası</label>
+            <div style="padding-top:10px" class="col-sm-10">
+                @Html.TextBoxFor(x => x.PaymentRequestModel.SecurityNumber, new { @class = "form-control" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label style="padding-top:10px" class="col-sm-2 control-label">Gecerlilik Süresi (Yıl)</label>
+            <div style="padding-top:10px" class="col-sm-10">
+                @Html.TextBoxFor(x => x.PaymentRequestModel.CardExpiryYear, new { @class = "form-control" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label style="padding-top:10px" class="col-sm-2 control-label">Gecerlilik Süresi (Ay)</label>
+            <div style="padding-top:10px" class="col-sm-10">
+                @Html.TextBoxFor(x => x.PaymentRequestModel.CardExpiryMonth, new { @class = "form-control" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label style="padding-top:10px" class="col-sm-2 control-label">Onaylamk için TIklayınız</label>
+            <div style="padding-top:10px" class="col-sm-10">
+                <button class="btn btn-primary">Onayla</button>
+            </div>
+
+        </div>
+    }
+</div>

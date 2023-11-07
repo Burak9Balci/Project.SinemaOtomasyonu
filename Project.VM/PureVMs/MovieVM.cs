@@ -14,6 +14,6 @@ namespace Project.VM.PureVMs
         public DateTime TakedownDate { get; set; }
         public string ImagePath { get; set; }
         public string SessionTime { get; set; }
-        public int SalonNo { get; set; }
+        public string SalonNo { get; set; }
     }
 }

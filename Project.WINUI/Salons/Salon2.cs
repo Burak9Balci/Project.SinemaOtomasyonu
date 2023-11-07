@@ -81,7 +81,7 @@ namespace Project.WINUI
                     ticket.Type = TicketType.Ticket;
                     (session.SelectedItem as Session).TotalRatio++;
                     _tRep.Add(ticket);
-                    (sender as Label).BackColor = Color.Red;
+                    (sender as Label).BackColor = Color.Azure;
                     (sender as Label).Enabled = false;
                     return;
                 }

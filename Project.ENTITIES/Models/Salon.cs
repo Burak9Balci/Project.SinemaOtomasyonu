@@ -10,9 +10,9 @@ namespace Project.ENTITIES.Models
     {
         public override string ToString()
         {
-            return SalonNo.ToString();
+            return $"Salon {SalonNo}";
         }
-        public int SalonNo { get; set; }
+        public string SalonNo { get; set; }
         public int Capacity { get; set; }
         //Relational Property
         public virtual List<Session> Seanses { get; set; }

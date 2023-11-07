@@ -10,7 +10,7 @@ namespace Project.VM.PureVMs
     {
         public int ID { get; set; }
         public string SessionTime { get; set; }
-        public int SessionSalon { get; set; }
+        public string SessionSalon { get; set; }
 
     }
 }

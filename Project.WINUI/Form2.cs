@@ -48,6 +48,9 @@ namespace Project.WINUI
                "Employee","Customer","Ticket","Seans","Salon","Rezervasyon","Movie","Order","OrderDetail"
             };
             cmbSelect.DataSource = degiskenler;
+            cmbSalon1.DataSource = cmbSalon2.DataSource = _sRep.GetNotPassives();
+            cmbMovie.DataSource = _mRep.GetNotPassives();
+            
         }
         int _employeeID;
         private void btnAccess_Click(object sender, EventArgs e)
@@ -70,6 +73,102 @@ namespace Project.WINUI
             if (cmbSelect.SelectedItem is "Movie") dgvBrif.DataSource = _mRep.GetAll();
             if (cmbSelect.SelectedItem is "Order") dgvBrif.DataSource = _oRep.GetAll(); 
             if (cmbSelect.SelectedItem is "OrderDetail") dgvBrif.DataSource = _oDDetail.GetAll();
+
+        }
+
+        private void btnMovie_Click(object sender, EventArgs e)
+        {
+            if (_mRep.Any(x => x.FilmTitle != txtName.Text))
+            {
+                if (cmbSalon1.SelectedItem != null)
+                {
+                    Movie m = new Movie();
+                    m.FilmTitle = txtName.Text;
+                    m.ReleaseDate = dtpRelease.Value.Date;
+                    m.TakedownDate = dtpTakeDown.Value.Date;
+                    m.ImagePath = txtImage.Text;
+                    m.Salon = _sRep.Find((cmbSalon1.SelectedItem as Salon).ID);
+                    _mRep.Add(m);
+                    dgvBrif.DataSource = _mRep.GetAll();
+                    MessageBox.Show("Basarılı bir şekilde Eklenmiştir", "Basarı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("ComboBox boş deger gir");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Bu Film Sinemaya Daha onceden Eklenmiş");
+            }
+            
+           
+        }
+        private void btnUpdateMovie_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void btnSeans_Click(object sender, EventArgs e)
+        {
+            if (_seansRep.Any(x => x.SessionTime != txtSessionTime.Text))
+            {
+                if (cmbSalon2.SelectedItem != null && cmbMovie.SelectedItem != null)
+                {
+                    Session s = new Session();
+                    s.Movie = _mRep.Find((cmbMovie.SelectedItem as Movie).ID);
+                    s.Salon = _sRep.Find((cmbSalon2.SelectedItem as Salon).ID);
+                    s.SessionTime = txtSessionTime.Text;
+                    _seansRep.Add(s);
+                    dgvBrif.DataSource = _seansRep.GetAll();
+                    MessageBox.Show("Basarılı bir şekilde Eklenmiştir","Basarı",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("ComboBoxlardan biri boş Deger giriniz");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Boyle bir Seans Mevcut");
+            }
+            
+         
+        }
+        private void btnUpdateSeans_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSalon_Click(object sender, EventArgs e)
+        {
+            if (_sRep.Any(x =>x.SalonNo != txtSalonNo.Text))
+            {
+                Salon s = new Salon();
+                s.Capacity = Convert.ToInt32(txtSalonCap.Text);
+                s.SalonNo = txtSalonNo.Text;
+                _sRep.Add(s);
+                dgvBrif.DataSource = _sRep.GetAll();
+                MessageBox.Show("Basarılı bir şekilde Eklenmiştir", "Basarı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Boyle bir salon var");
+            }
+            
+        }
+        private void btnUpdateSalon_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
+
+       
+
+       
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
 
         }
 

@@ -82,6 +82,7 @@ namespace Project.WINUI
                     (session.SelectedItem as Session).TotalRatio++;
                     _tRep.Add(ticket);
                     (sender as Label).Enabled = false;
+                    (sender as Label).BackColor = Color.Azure;
                     return;
                 }
 

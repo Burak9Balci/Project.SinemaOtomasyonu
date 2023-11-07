@@ -81,23 +81,23 @@ namespace Project.DAL.Init
             #region Salon
             Salon salon1 = new Salon()
             {
-                SalonNo = 1,
+                SalonNo = "1",
                 Capacity = 14,
 
             };
             Salon salon2 = new Salon()
             {
-                SalonNo = 2,
+                SalonNo ="2",
                 Capacity = 14
             };
             Salon salon3 = new Salon()
             {
-                SalonNo = 3,
+                SalonNo = "3",
                 Capacity = 14
             };
             Salon salon4 = new Salon()
             {
-                SalonNo = 4,
+                SalonNo = "4",
                 Capacity = 14
             };
             

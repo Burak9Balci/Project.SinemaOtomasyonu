@@ -63,7 +63,7 @@
             this.btnUpdateSalon = new System.Windows.Forms.Button();
             this.btnUpdateMovie = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtReson = new System.Windows.Forms.TextBox();
             this.cmbSelect = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -374,12 +374,12 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // textBox1
+            // txtReson
             // 
-            this.textBox1.Location = new System.Drawing.Point(1060, 387);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 17;
+            this.txtReson.Location = new System.Drawing.Point(1060, 387);
+            this.txtReson.Name = "txtReson";
+            this.txtReson.Size = new System.Drawing.Size(100, 20);
+            this.txtReson.TabIndex = 17;
             // 
             // cmbSelect
             // 
@@ -413,7 +413,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1803, 570);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtReson);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnUpdateSeans);
             this.Controls.Add(this.btnUpdateSalon);
@@ -497,7 +497,7 @@
         private System.Windows.Forms.Button btnUpdateSalon;
         private System.Windows.Forms.Button btnUpdateMovie;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtReson;
         private System.Windows.Forms.ComboBox cmbSelect;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;

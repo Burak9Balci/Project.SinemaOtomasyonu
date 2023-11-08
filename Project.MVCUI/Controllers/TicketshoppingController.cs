@@ -65,7 +65,7 @@ namespace Project.MVCUI.Controllers
                 if (Session["vip"] != null && ticket.TicketDate.Date <= DateTime.Now.AddDays(7).Date)
                 {
                     Ticket t = new Ticket();
-                    t.Session = _sRep.Find(ticket.ID);
+                    t.Session = _sRep.FirstOrDefault(x =>x.SessionTime == ticket.SessionTime);
                     t.SeatNumber = ticket.SeatNumber;
                     t.Type = TicketType.Ticket;
                     t.Session.TotalRatio++;
@@ -73,10 +73,10 @@ namespace Project.MVCUI.Controllers
                     _tRep.Add(t);
                     return RedirectToAction("ConfirmOrder", t);
                 }
-                else if (ticket.TicketDate.Date <= DateTime.Now.AddDays(2).Date && ticket.ID != 0)
+                else if (ticket.TicketDate.Date <= DateTime.Now.AddDays(2).Date)
                 {
                     Ticket t = new Ticket();
-                    Session["session"] = t.Session = _sRep.Find(ticket.ID);
+                    Session["session"] = t.Session = _sRep.FirstOrDefault(x => x.SessionTime == ticket.SessionTime);
                     t.SeatNumber = ticket.SeatNumber;
                     t.Type = TicketType.Ticket;
                     t.Session.TotalRatio++;

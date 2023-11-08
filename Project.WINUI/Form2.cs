@@ -104,9 +104,28 @@ namespace Project.WINUI
             
            
         }
+        private void Engelle()
+        {
+            MessageBox.Show("Lutfen bir Sıra seciniz");
+        }
         private void btnUpdateMovie_Click(object sender, EventArgs e)
         {
-
+            if (dgvBrif.SelectedRows.Count > 0)
+            {
+                (dgvBrif.SelectedRows[0].DataBoundItem as Movie).EmployeeID = _employeeID;
+                (dgvBrif.SelectedRows[0].DataBoundItem as Movie).FilmTitle = txtName.Text;
+                (dgvBrif.SelectedRows[0].DataBoundItem as Movie).ReleaseDate = dtpRelease.Value.Date;
+                (dgvBrif.SelectedRows[0].DataBoundItem as Movie).TakedownDate = dtpRelease.Value.Date;
+                (dgvBrif.SelectedRows[0].DataBoundItem as Movie).Salon = _sRep.Find((cmbSalon1.SelectedItem as Salon).ID);
+                (dgvBrif.SelectedRows[0].DataBoundItem as Movie).ImagePath = txtImage.Text;
+                _mRep.Update(dgvBrif.SelectedRows[0].DataBoundItem as Movie);
+                dgvBrif.DataSource = _mRep.GetAll();
+                MessageBox.Show("Basarılı bir şekilde Guncellendi", "Basarı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                Engelle();
+            }
         }
         private void btnSeans_Click(object sender, EventArgs e)
         {
@@ -136,7 +155,19 @@ namespace Project.WINUI
         }
         private void btnUpdateSeans_Click(object sender, EventArgs e)
         {
-
+            if (dgvBrif.SelectedRows.Count > 0)
+            {
+                (dgvBrif.SelectedRows[0].DataBoundItem as Session).SessionTime = txtSessionTime.Text;
+                (dgvBrif.SelectedRows[0].DataBoundItem as Session).Salon = _sRep.Find((cmbSalon2.SelectedItem as Salon).ID);
+                (dgvBrif.SelectedRows[0].DataBoundItem as Session).Movie = _mRep.Find((cmbMovie.SelectedItem as Movie).ID);
+                _seansRep.Update(dgvBrif.SelectedRows[0].DataBoundItem as Session);
+                MessageBox.Show("Basarılı bir şekilde Guncellendi", "Basarı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dgvBrif.DataSource = _seansRep.GetAll();
+            }
+            else
+            {
+                Engelle();
+            }
         }
 
         private void btnSalon_Click(object sender, EventArgs e)
@@ -158,20 +189,36 @@ namespace Project.WINUI
         }
         private void btnUpdateSalon_Click(object sender, EventArgs e)
         {
-
+            if (dgvBrif.SelectedRows.Count > 0)
+            {
+                (dgvBrif.SelectedRows[0].DataBoundItem as Salon).Capacity = Convert.ToInt32(txtSalonCap.Text);
+                (dgvBrif.SelectedRows[0].DataBoundItem as Salon).SalonNo = txtSalonNo.Text;
+                (dgvBrif.SelectedRows[0].DataBoundItem as Salon).EmployeeID = _employeeID;
+                _sRep.Update((dgvBrif.SelectedRows[0].DataBoundItem as Salon));
+                MessageBox.Show("Basarılı bir şekilde Guncellendi", "Basarı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dgvBrif.DataSource = _sRep.GetAll();
+            }
+            else
+            {
+                Engelle();
+            }
         }
-
-        
-
-       
-
-       
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            if (dgvBrif.SelectedRows.Count > 0)
+            {
+                (dgvBrif.SelectedRows[0].DataBoundItem as BaseEntity).CancelReason = txtReson.Text;
+                (dgvBrif.SelectedRows[0].DataBoundItem as BaseEntity).EmployeeID = _employeeID;
+                (dgvBrif.SelectedRows[0].DataBoundItem as BaseEntity).DeletedDate = DateTime.Now;
+                (dgvBrif.SelectedRows[0].DataBoundItem as BaseEntity).Status = DataStatus.Deleted;
+                txtReson.Text = string.Empty;
+                MessageBox.Show("Islem tamam bir Sayfa yenileme gerekli");
+                _cRep.Save();
+            }
+            else
+            {
+                Engelle();
+            }
         }
-
-        
     }
 }

@@ -7,9 +7,7 @@
 <head>
     <script>
         function showTickets(button) {
-          
-               
-            
+        
         }
         function getSeatNumber(button) {
             document.getElementById('seatNumber').value = button.name;
@@ -17,6 +15,9 @@
         }
         function getTime() {
             document.getElementById('hiddenTime').value = document.getElementById('datePicker').value;
+        }
+        function getSession(select) {
+            document.getElementById('sessionTime').value = select.value;
         }
     </script>
     <style>
@@ -57,7 +58,12 @@
     <h1>@TempData["bug"]</h1>
     @using (Html.BeginForm("TakeTicket", "Ticketshopping", new { salonNo = Model.Movie.SalonNo, filmTitle = Model.Movie.FilmTitle }, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        @Html.DropDownListFor(x => x.Ticket.ID, new SelectList(Model.Sessions, "ID", "SessionTime"), "Seans Seciniz", new { @class = "form-control" })
+        <select class="form-control" onchange="getSession(this)">
+           @foreach (SessionVM item in Model.Sessions)
+           {
+               <option >@item.SessionTime</option>
+           }
+        </select>
         <input type="date" id="datePicker" onchange="getTime()" class="form-control" />
         <div class="sira">
             <div class="sahne">Sahne</div>
@@ -86,6 +92,7 @@
         </div>
         @Html.HiddenFor(x => x.Ticket.SeatNumber, new { id = "seatNumber" })
         @Html.HiddenFor(x => x.Ticket.TicketDate, new { id = "hiddenTime" })
+        @Html.HiddenFor(x =>x.Ticket.SessionTime,new {id = "sessionTime"})
     }
 </body>
 

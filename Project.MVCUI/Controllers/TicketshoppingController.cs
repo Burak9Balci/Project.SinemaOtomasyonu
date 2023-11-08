@@ -62,7 +62,7 @@ namespace Project.MVCUI.Controllers
             }
             else if (ticket.TicketDate.Date >= DateTime.Now.Date)
             {
-                if (Session["vip"] != null && ticket.TicketDate.Date <= DateTime.Now.AddDays(7).Date)
+                if (Session["vip"] != null && ticket.TicketDate.Date <= DateTime.Now.AddDays(7).Date && ticket.SessionTime != null)
                 {
                     Ticket t = new Ticket();
                     t.Session = _sRep.FirstOrDefault(x =>x.SessionTime == ticket.SessionTime);
@@ -73,7 +73,7 @@ namespace Project.MVCUI.Controllers
                     _tRep.Add(t);
                     return RedirectToAction("ConfirmOrder", t);
                 }
-                else if (ticket.TicketDate.Date <= DateTime.Now.AddDays(2).Date)
+                else if (ticket.TicketDate.Date <= DateTime.Now.AddDays(2).Date && ticket.SessionTime != null)
                 {
                     Ticket t = new Ticket();
                     Session["session"] = t.Session = _sRep.FirstOrDefault(x => x.SessionTime == ticket.SessionTime);
@@ -85,7 +85,7 @@ namespace Project.MVCUI.Controllers
                     return RedirectToAction("ConfirmOrder", t);
                 }
                 TempData["vipbug"] = Session["vip"] != null ? "You can buy tickets at least 7 days in advance" : null;
-                TempData["bug"] = ticket.ID == 0 ? "Select a session " : "You can buy tickets at least 2 days in advance";
+                TempData["bug"] = ticket.SessionTime== null ? "Select a session " : "You can buy tickets at least 2 days in advance";
                 return RedirectToAction("TakeTicket", new { title = filmTitle });
             }
             TempData["time"] = "You can buy tickets at least 2 days in advance";
@@ -134,7 +134,7 @@ namespace Project.MVCUI.Controllers
         }
         public ActionResult ConfirmOrder()
         {
-            return View(); 
+            return View(Session["kart"]); 
         }
         [HttpPost]
         public ActionResult ConfirmOrder(OrderPageVM orderPage,Ticket t)
@@ -238,7 +238,7 @@ namespace Project.MVCUI.Controllers
                     od.Ticket = t;
                     od.TotalPrice = orderPage.PaymentRequestModel.ShoppingPrice;
                     _oDetailRep.Add(od);
-                    MailService.Send(o.MailAddress, subject: "Bilet", body: $"biletiniz başarıyla alınmıştır {o.TotalPrice}$ tutarında odeme yapilmiştir");
+                    MailService.Send(o.MailAddress, subject: "Bilet", body: $"biletiniz başarıyla alınmıştır {o.TotalPrice}₺ tutarında odeme yapilmiştir");
                     return RedirectToAction("OrderInfo");
                 }
                 else

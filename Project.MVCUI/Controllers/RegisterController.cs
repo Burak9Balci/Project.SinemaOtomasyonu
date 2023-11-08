@@ -51,12 +51,15 @@ namespace Project.MVCUI.Controllers
 
                     };
                     _cRep.Add(c);
+                    string mailBody = "Tekbrikler Hesabınıx olusturuldu hesabinizi aktive etmek için http://localhost:57382/Register/Activation/" + c.ActivationCode + " linkine tıklaya bilirsiniz";
+                    MailService.Send(customer.Email, body: mailBody, subject: "Hesap Aktivasyon");
                     if (c.CustomerCategory == CustomerRole.Vip)
                     {
+                        string vipMailBody = "Tekbrikler Hesabınıx olusturuldu hesabınız odeme yaptıktan sonra aktif olucaktır.";
+                        MailService.Send(customer.Email, body: vipMailBody, subject: "Hesap Aktivasyon");
                         return RedirectToAction("VipOrder", c);
                     }
-                    string mailbody = "Tekbrikler Hesabınıx olusturuldu hesabinizi aktive etmek için http://localhost:57382/Register/Activation/" + c.ActivationCode + " linkine tıklaya bilirsiniz";
-                    MailService.Send(customer.Email, body: mailbody, subject: "Hesap Aktivasyon");
+                    
                     return View("RegisterOK");
                 }
                 else
@@ -98,6 +101,7 @@ namespace Project.MVCUI.Controllers
         [HttpPost]
         public ActionResult VipOrder(OrderPageVM orderPage, Customer c)
         {
+            Session["kart"] = orderPage.PaymentRequestModel;
             orderPage.PaymentRequestModel.ShoppingPrice = 200;
             bool bResult;
             using (HttpClient client = new HttpClient())

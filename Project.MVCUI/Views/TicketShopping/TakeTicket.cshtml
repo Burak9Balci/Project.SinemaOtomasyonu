@@ -59,10 +59,11 @@
     @using (Html.BeginForm("TakeTicket", "Ticketshopping", new { salonNo = Model.Movie.SalonNo, filmTitle = Model.Movie.FilmTitle }, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <select class="form-control" onchange="getSession(this)">
-           @foreach (SessionVM item in Model.Sessions)
-           {
-               <option >@item.SessionTime</option>
-           }
+            <option value="">Seans Seciniz</option>
+            @foreach (SessionVM item in Model.Sessions)
+            {
+                <option>@item.SessionTime</option>
+            }
         </select>
         <input type="date" id="datePicker" onchange="getTime()" class="form-control" />
         <div class="sira">

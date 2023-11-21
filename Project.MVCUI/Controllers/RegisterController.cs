@@ -101,7 +101,10 @@ namespace Project.MVCUI.Controllers
         [HttpPost]
         public ActionResult VipOrder(OrderPageVM orderPage, Customer c)
         {
-            Session["kart"] = orderPage.PaymentRequestModel;
+            if (orderPage.Save)
+            {
+                Session["kart"] = orderPage.PaymentRequestModel;
+            }
             orderPage.PaymentRequestModel.ShoppingPrice = 200;
             bool bResult;
             using (HttpClient client = new HttpClient())
@@ -134,6 +137,7 @@ namespace Project.MVCUI.Controllers
                     c.MonthlyDate = DateTime.Now;
                     _oRep.Add(o);
                     _cRep.Update(c);
+                    MailService.Send(c.Email,body:"Hesabınız Vip olmustur.");
                     return RedirectToAction("OrderOk");
 
                 }

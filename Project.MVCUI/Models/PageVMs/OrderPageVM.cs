@@ -11,5 +11,6 @@ namespace Project.MVCUI.Models.PageVMs
     {
         public OrderVM Order { get; set; }
         public PaymentRequestModel PaymentRequestModel { get; set; }
+        public bool Save { get; set; }
     }
 }

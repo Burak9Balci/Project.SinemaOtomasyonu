@@ -39,11 +39,11 @@ namespace Project.MVCUI.Controllers
                 TempData["yanlissifre"] = "Böyle bir sifre yok";
                 return View();
             }
-            else if (_cRep.Any(x => x.VipID == customer.VipID && x.CustomerCategory == CustomerRole.Vip))
+            else if (_cRep.Any(x => x.Email == customer.Email && x.CustomerCategory == CustomerRole.Vip))
             {
                 if (customer.PassWord == DanteCrypto.SifreBoz(_cRep.FirstOrDefault(x =>x.VipID == customer.VipID).PassWord))
                 {
-                    Session["vip"] = _cRep.FirstOrDefault(x => x.VipID == customer.VipID);
+                    Session["vip"] = _cRep.FirstOrDefault(x => x.Email == customer.Email);
                     return RedirectToAction("MovieList", "TicketShopping");
                 }
                 TempData["yanlissifre"] = "Böyle bir sifre yok";

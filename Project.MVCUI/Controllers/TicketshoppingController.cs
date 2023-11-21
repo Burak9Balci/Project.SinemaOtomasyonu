@@ -5,6 +5,7 @@ using Project.COMMON.Tools;
 using Project.ENTITIES.Enums;
 using Project.ENTITIES.Models;
 using Project.MVCUI.Models.PageVMs;
+using Project.MVCUI.OuterRequestTool;
 using Project.VM.PureVMs;
 using System;
 using System.Collections.Generic;
@@ -134,12 +135,15 @@ namespace Project.MVCUI.Controllers
         }
         public ActionResult ConfirmOrder()
         {
-            return View(Session["kart"]); 
+            return View(); 
         }
         [HttpPost]
         public ActionResult ConfirmOrder(OrderPageVM orderPage,Ticket t)
         {
-
+            if (orderPage.Save == true)
+            {
+                orderPage.PaymentRequestModel = (Session["kart"] as OrderPageVM).PaymentRequestModel;
+            }
             if ((Session["vip"] as Customer) != null)
             {
                 if (DateTime.Now > (Session["vip"] as Customer).MonthlyDate.AddMonths(1))
